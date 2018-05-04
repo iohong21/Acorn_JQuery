@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.container{
+			width: 500px;
+			margin: 0 auto;
+		}
+		.base{
+			width: 500px;
+			height: 500px;
+			position: relative;
+		}
+		.pbase{
+			top: 0px;
+			right: 0px;
+			bottom: 0px;
+			left: 0px;
+			position: absolute;		
+		}
+		.backdrop{
+			top: 0px;
+			right: 0px;
+			bottom: 0px;
+			left: 0px;
+			background-color: pink;
+			position: absolute;
+			opacity: 0.6;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Test</h1>
+		<button class="btn">click</button>
+		<div class="base">
+			<div class="pbase">
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum commodi, nemo consectetur sit veritatis maxime non libero? Eligendi, sint, ipsum rerum ea illo mollitia animi distinctio at voluptatibus deserunt. Incidunt!</p>
+			</div>
+			<div class="backdrop"></div>
+		</div>
+	</div>
+	<script src="js/jquery-3.3.1.js"></script>
+	<script>
+		$(".btn").click(function(){
+			$(".backdrop").css("z-index", "9");
+			$(".pbase").css("z-index", "10");
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Step04_Effect2.html</title>
+	<style>
+		.wrapper{
+			width: 300px;
+			border: 1px solid red;
+		}
+		.wrapper img{
+			/* 폭의 최대값: 부모 폭의 100% */
+			max-width: 100%;
+		}
+	</style>
+</head>
+<body>
+	<button id="hideBtn">숨기기</button>
+	<button id="showBtn">보이기</button>
+	<div class="wrapper">
+		<img src="images/image1.png"/>
+	</div>
+	<script src="js/jquery-3.3.1.js"></script>
+	<script>
+		$("#hideBtn").click(function(){
+			$(".wrapper").fadeOut(1400);
+		});
+		$("#showBtn").click(function(){
+			$(".wrapper").fadeIn(1400);
+		});
+	</script>
+</body>
+</html>

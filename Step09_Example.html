@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Step09_Example.html</title>
+	<style>
+		.loader{
+			position: fixed;
+			width: 100%;
+			left: 0px;
+			bottom: 0px;
+			text-align: center;
+			/*background-color: #999;*/
+			display: none;
+		}
+		.spacer{
+			height: 500px;
+			background-color: #999;
+		}
+	</style>
+</head>
+<body>
+	<h1>로딩 이미지 테스트</h1>
+	<dis class="container">
+		<div class="spacer">.spacer</div>
+		<div class="spacer">.spacer</div>
+		<div class="spacer">.spacer</div>
+	</dis>
+	<div class="loader">
+		<img src="images/loader.gif" alt="">
+	</div>
+	<script src="js/jquery-3.3.1.js"></script>
+	<script>
+		$(window).on("scroll", function(){
+			// 위쪽으로 스크롤된 길이 구하기
+			var scrollTop = $(window).scrollTop();
+			// window 의 높이
+			var windowHeight = $(window).height();
+			// document의 높이
+			var documentHeight = $(document).height();
+
+			var isBottom = scrollTop + windowHeight == documentHeight;
+			if(isBottom) {
+				$(".loader").show();
+				setTimeout(function(){
+					$("<div><img src='images/image1.png'/></div>")
+					.addClass("spacer")
+					.appendTo(".container")
+					.hide()
+					.fadeIn();
+
+					$(".loader").hide();
+				}, 3000);
+			}
+		})
+	</script>
+</body>
+</html>

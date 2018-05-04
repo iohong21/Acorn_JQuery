@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>myJQueryTest2.html</title>
+	<style>
+		#container{
+			width:1000px;
+			height: 650px;
+			border: 1px solid red;
+			position: relative;
+		}
+		#ball{
+			position: absolute;
+			display: inline-block;
+			top: 0px;
+			left: 0px;
+		}
+		#box{
+			width: 100px;
+			height: 100px;
+			background-color: blue;
+			position: absolute;
+			top: 500px;
+			left: 20px;
+			display: inline-block;
+		}
+	</style>
+</head>
+<body>
+	<button id="fire">Click</button>
+	<div id="container">
+		<ul id="ball"><li></li></ul>
+		<div id="box"></div>
+	</div>		
+	<script src="js/jquery-3.3.1.js"></script>
+	<script>
+		var start = function(){
+			var ballX = 0, ballY = 0;
+			var ballH = 21;
+			var tmrID = 0;
+			$("#ball").css({
+				"display" : "inline-block",
+				"top" : "0px",
+				"left" : "0px"
+			});
+			$("#box").fadeIn();
+			$("#container").css("width", $("body").innerWidth()+"px");
+			tmrID = setInterval(function(){
+				ballY += 10;
+				if((ballY > 500) || (500-ballY < 30)) {
+					// 종료
+					$("#ball").css("display", "none");
+					$("#box").fadeOut();
+					clearInterval(tmrID);
+				} else {
+					ballY += 10;
+					$("#ball").css("top", ballY+"px");
+				}
+			},200);
+		};
+		$("#fire").click(function(){ start(); });
+		// box top - ball top 이 30 이내이면 collision
+	</script>
+</body>
+</html>

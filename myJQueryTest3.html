@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Test3</title>
+	<style>
+		.yearBox{
+			text-align: center;
+		}
+		.year{
+			font-size: 30px;
+			display: inline-block;
+		}
+		.week, .day{
+			font-size: 30px;
+			margin-left: 30px;
+			width: 30px;
+			display: inline-block;
+		}
+		#sun, .sun{
+			color: red;
+		}
+		#sat, .sat{
+			color: blue;
+		}
+	</style>
+</head>
+<body>
+	<div class="yearBox">
+		<button id="prev"><&nbsp;</button>
+		<div class="year"></div>
+		<button id="next">>&nbsp;</button>
+	</div>
+	<br/>
+	<div class="weekBox">
+		<div class="week" id="sun">일</div>
+		<div class="week" id="mon">월</div>
+		<div class="week" id="tue">화</div>
+		<div class="week" id="wed">수</div>
+		<div class="week" id="thu">목</div>
+		<div class="week" id="fri">금</div>
+		<div class="week" id="sat">토</div>
+	</div>
+	<br/>
+	<div class="day sun"></div>
+	<div class="day"></div>
+	<div class="day"></div>
+	<div class="day"></div>
+	<div class="day"></div>
+	<div class="day"></div>
+	<div class="day sat"></div>
+	<br/>
+	<div class="day sun"></div>
+	<div class="day"></div>
+	<div class="day"></div>
+	<div class="day"></div>
+	<div class="day"></div>
+	<div class="day"></div>
+	<div class="day sat"></div>
+	<br/>
+	<div class="day sun"></div>
+	<div class="day"></div>
+	<div class="day"></div>
+	<div class="day"></div>
+	<div class="day"></div>
+	<div class="day"></div>
+	<div class="day sat"></div>
+	<br/>
+	<div class="day sun"></div>
+	<div class="day"></div>
+	<div class="day"></div>
+	<div class="day"></div>
+	<div class="day"></div>
+	<div class="day"></div>
+	<div class="day sat"></div>
+	<br/>
+	<div class="day sun"></div>
+	<div class="day"></div>
+	<div class="day"></div>
+	<div class="day"></div>
+	<div class="day"></div>
+	<div class="day"></div>
+	<div class="day sat"></div>
+	<br/>
+	<script src="js/jquery-3.3.1.js"></script>
+	<script>
+		var curr = new Date();
+		var calendar = function(currYear) {
+			var tDay = ["","","","","","","",
+			"","","","","","","",
+			"","","","","","","",
+			"","","","","","","",
+			"","","","","","",""];
+			var maxDay = [31,28,31,30,51,30,31,31,30,31,30,31];
+			var width = $("body").clientWidth;
+			var today = currYear // new Date();
+			var yy = today.getFullYear();
+			var mm = today.getMonth()+1;
+			var dd = today.getDate();
+			var week = new Date(yy+"-"+mm+"-01").getDay();
+
+			var isLeepYear = function(year) {
+				return year % 4 == 0 && 
+					 (year % 100 != 0 || year % 400 == 0) ? true : false;
+			}
+
+			maxDay[1] = isLeepYear(yy) ? 29 : 28;
+			$(".yearBox").css("width", width+"px");
+			$(".year").text(yy + "년 " + mm + "월");
+			$(".day").text("");
+
+			for(var i=0; i<maxDay[mm-1]; i++){
+				tDay[i+week] = i;
+				$(".day")[i+week].innerText = i+1;
+			}
+		};
+
+		var prevMonth = function(){
+			var yy = curr.getFullYear();
+			var mm = curr.getMonth()+1;
+			var cmm = mm-1;
+			if(cmm < 1) {
+				yy -= 1;
+				if(yy < 1) {
+					yy = 1;	
+					cmm = mm;
+				} else {
+					cmm = 12;
+				}
+			}
+			curr = new Date(yy+"-"+cmm+"-01");
+		};
+
+		var nextMonth = function(){
+			var yy = curr.getFullYear();
+			var mm = curr.getMonth()+1;
+			var cmm = mm + 1;
+			if(cmm > 12) {
+				yy += 1;
+				cmm = 1;
+			}
+			curr = new Date(yy+"-"+cmm+"-01");
+		};
+
+		calendar(curr);
+
+		$("#next").click(function(){
+			nextMonth();
+			calendar(curr);
+		});
+		$("#prev").click(function(){
+			prevMonth();
+			calendar(curr);
+		});
+	</script>
+</body>
+</html>

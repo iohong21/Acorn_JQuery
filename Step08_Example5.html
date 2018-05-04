@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Step08_Example5.html</title>
+	<style>
+		.wrapper{
+			width: 400px;
+			height: 400px;
+			border: 1px solid red;
+			overflow: hidden;
+		}
+		.box{
+			border: 1px solid blue;
+			overflow: auto;
+		}
+		.box img{
+			width: 400px;
+			float: left;
+		}
+	</style>
+</head>
+<body>
+<div class="wrapper">
+	<div class="box">
+		<img src="images/image1.png"/>
+		<img src="images/image2.png"/>
+		<img src="images/image3.png"/>
+		<img src="images/image4.png"/>
+		<img src="images/image5.png"/>
+	</div>
+</div>
+<button id="prevBtn">&laquo;</button>
+<button id="nextBtn">&raquo;</button>
+<br>
+<button id="playBtn">Play</button>
+<button id="stopBtn">Stop</button>
+<script src="js/jquery-3.3.1.js"></script>
+<script>
+	var tmrID;
+	var scrollArrow = 1;
+	var currentIndex = 0;
+	var lastIndex=$(".box img").length-1;
+
+	var boxWidth=$(".box img").length*400;
+
+
+	// .box 의 폭 지정하기 
+	$(".box").css("width", boxWidth+"px");
+
+	var moveLeftHold = function() {
+		if(currentIndex == lastIndex) {
+			return;
+		}
+		currentIndex++;
+		$(".box").animate({
+			marginLeft:"-=400px"
+		});
+	};
+	var moveLeft = function(){
+		if(currentIndex == lastIndex) {
+			currentIndex = 0;
+			var left = lastIndex * 400;
+			$(".box").animate({
+				marginLeft: "+"+left+"px"
+			});
+			return;
+		}
+		currentIndex++;
+		$(".box").animate({
+			marginLeft:"-=400px"
+		});
+	};
+
+	var moveRight = function(){
+		if(currentIndex == 0) {
+			return;
+		}
+		currentIndex--;
+		$(".box").animate({
+			marginLeft:"+=400px"
+		});
+	};
+
+	$("#nextBtn").click(function(){
+		moveLeftHold();
+	});
+
+	$("#prevBtn").click(function(){
+		moveRight();
+	});
+
+	var isMouseOver = false;
+	$(".box").mouseover(function(){
+		isMouseOver = true;
+	});
+	$(".box").mouseout(function(){
+		isMouseOver = false;
+	});
+
+	var moveTurn = function() {
+		if(scrollArrow == 1) {
+			if(currentIndex == lastIndex) {
+				scrollArrow = 0;
+				moveRight();
+			} else {
+				moveLeft();
+			}
+		} else {
+			if(currentIndex == 0) {
+				scrollArrow = 1;
+				moveLeft();
+			} else {
+				moveRight();
+			}
+		}
+	};
+
+	var moveImage = function() {
+		if(currentIndex == lastIndex) {
+			currentIndex = 0;
+			var left = lastIndex * 400;
+			$(".box").animate({
+				//marginLeft:"0px"
+				marginLeft: "+="+left+"px"
+			});
+			return;
+		}
+		currentIndex++;
+		$(".box").animate({
+			marginLeft:"-=400px"
+		});
+	}
+
+	var doTimer = function() {
+		return setInterval(function(){
+					if(isMouseOver){
+						return;
+					}
+					
+					moveImage();
+
+					//moveTurn();
+
+				}, 1000);	
+	};
+
+	tmrID =	doTimer();
+
+	$("#stopBtn").click(function(){
+		clearInterval(tmrID);
+	});
+
+	$("#playBtn").click(function(){
+		tmrID =	doTimer();
+	});
+</script>	
+</body>
+</html>

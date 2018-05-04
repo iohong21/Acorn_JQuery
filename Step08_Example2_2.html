@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Step08_Example2_2.html</title>
+	<style>
+		/*.container{
+			width: 768px;
+			margin: 0 auto;
+		}*/
+		.wrapper{
+			width: 400px;
+			height: 400px;
+			border: 1px solid red;
+			position: relative;
+			overflow: hidden;
+		}
+		.wrapper img{
+			width: 400px;
+			position: absolute;
+			top: 0px;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<img src="images/image1.png"/>
+		<img src="images/image2.png"/>
+		<img src="images/image3.png"/>
+		<img src="images/image4.png"/>
+		<img src="images/image5.png"/>
+	</div>
+	<button id="prevBtn">&laquo;</button>
+	<button id="nextBtn">&raquo;</button>
+	<script src="js/jquery-3.3.1.js"></script>
+	<script>
+		$(".wrapper img").each(function(index){
+			$(this).css("left", "+="+(index*400)+"px");
+		});
+		$("#nextBtn").click(function(){
+			$(".wrapper img").animate({
+				left: "-=400px"
+			});
+		})
+		$("#prevBtn").click(function(){
+			$(".wrapper img").animate({
+				left: "+=400px"
+			});
+		})
+	</script>
+</body>
+</html>

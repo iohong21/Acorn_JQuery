@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.box{
+			width: 100px;
+			height: 100px;
+			border: 1px solid red;
+			background-color: yellow;
+		}
+	</style>
+</head>
+<body>
+	<div class="box"></div>
+	<script src="js/jquery-3.3.1.js"></script>
+	<script>
+		var dec2hex = function(dec){
+			var mok = parseInt(dec / 16);
+			var na = dec % 16;
+			var str = "0123456789abcdef";
+			return str.substr(mok,1)+str.substr(na,1);
+		};
+		var rgb2hex = function(r,g,b){
+			return "#" + dec2hex(r) + dec2hex(g) + dec2hex(b);
+		}
+		var rnd = function(low, high) {
+			return (Math.random()*high)+low;
+		}
+
+		var isDown = false;
+		var prevX = 0;
+		var mLeft = 0;
+		$(".box").mousedown(function(event){ 
+			if(!isDown) {
+				isDown = true; 
+				prevX = event.offsetX;
+			}
+		});
+		$(".box").mouseup(function(event){ isDown = false; });
+		$(".box").mousemove(function(event){
+			if(isDown) {
+				mLeft += (event.offsetX - prevX);
+				prevX = event.offsetX;
+				$(".box").css("margin-left", mLeft+"px");
+			}
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Step05_Class.html</title>
+	<style>
+		.box{
+			width: 100px;
+			height: 100px;
+			border: 1px solid red;
+			cursor: pointer;
+		}
+		.active{
+			background-color: yellow;
+			width: 120px;
+			height: 120px;
+			border-width: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<script src="js/jquery-3.3.1.js"></script>
+	<script>
+		/*
+			클래스 추가: .addClass()
+			클래스 제거: .removeClass()
+			클래스 토글: .toggleClass()
+			클래스 확인: .hasClass()
+		*/ 
+		$(".box").click(function(){
+			// active 클래스 추가하기
+			// (여러개의 클래스를 추가시 띄우고 클래스명 기입)
+			//  예: $(this).addClass("active disactive otherclass");
+			$(this).addClass("active");
+		});
+		$(".box").mouseout(function(){
+			// active 클래스 제거하기
+			$(this).removeClass("active");
+		});
+	</script>
+</body>
+</html>

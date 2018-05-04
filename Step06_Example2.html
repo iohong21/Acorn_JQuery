@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Step06_Example2.html</title>
+	<style>
+		#msgList li:hover{
+			background-color: yellow;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<input type="text" id="inputMsg">
+	<button id="sendBtn">전송</button>
+	<ul id="msgList">
+		<li>하나</li>
+		<li>두울</li>
+	</ul>
+	<script src="js/jquery-3.3.1.js"></script>
+	<script>
+		var shareFunc = function() {
+			var v = $("#inputMsg").val();
+			$("<li>")
+			.text(v)
+			.appendTo("#msgList");
+
+			$("#inputMsg").val("").focus();
+		};
+
+		$("#sendBtn").click(function(){
+			shareFunc();
+		});
+		$("#inputMsg").keydown(function(event){
+			if(event.keyCode == 13) {
+				shareFunc();
+			}
+		});
+
+		$("#inputMsg").focus();
+
+		/*
+			현재 존재 하거나 미래에 추가될 
+			문서 객체의 이벤트 처리 하는 방법
+			$(document).on("click", "#msgList li", function(){})
+			              eventName  selector       처리할 함수
+		*/ 
+		$(document).on("click", "#msgList li", function(){
+			var isDelete = confirm("제거 할까요?");
+			if(isDelete) {
+				// .remove() => 문서 객체를 body 에서 제거
+				$(this).remove();
+			}
+		});
+	</script>
+</body>
+</html>

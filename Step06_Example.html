@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Step06_Example.html</title>
+	<style>
+		#msgList li:hover{
+			background-color: yellow;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<input type="text" id="inputMsg">
+	<button id="sendBtn">전송</button>
+	<ul id="msgList">
+		<li>하나</li>
+		<li>두울</li>
+	</ul>
+	<script src="js/jquery-3.3.1.js"></script>
+	<script>
+		var shareFunc = function() {
+			var v = $("#inputMsg").val();
+			$("<li>")
+			.text(v)
+			.appendTo("#msgList")
+			// .on("click", function(){
+			.click(function(){		// 새로 추가된 요소에 이벤트 등록
+				alert($(this).text());
+			});
+
+
+			$("#inputMsg").val("").focus();
+			// $("#inputMsg").focus();
+		};
+
+		$("#sendBtn").click(function(){
+			shareFunc();
+		});
+		$("#inputMsg").keydown(function(event){
+			if(event.keyCode == 13) {
+				shareFunc();
+			}
+		});
+
+		$("#msgList li").click(function(){
+			alert($(this).text());
+		});
+		$("#inputMsg").focus();
+	</script>
+</body>
+</html>
