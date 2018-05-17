@@ -58,6 +58,18 @@
 		var currentIndex = 0;
 		$("#nextBtn").click(function(){
 			if(currentIndex == ($(".wrapper img").length-1)) {
+				var ls = 0;
+				$(".wrapper img").each(function(index){
+					if(index == 0) {
+						$(this).animate({
+							left: ls
+						});
+					}  else {
+						$(this).css("left", ls+"px");
+					}
+					ls+=400;
+				});
+				currentIndex = 0;
 				return;
 			}
 			currentIndex++;

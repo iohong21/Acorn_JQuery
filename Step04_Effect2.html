@@ -17,6 +17,7 @@
 <body>
 	<button id="hideBtn">숨기기</button>
 	<button id="showBtn">보이기</button>
+	<button id="toggleBtn">토글</button>
 	<div class="wrapper">
 		<img src="images/image1.png"/>
 	</div>
@@ -27,6 +28,9 @@
 		});
 		$("#showBtn").click(function(){
 			$(".wrapper").fadeIn(1400);
+		});
+		$("#toggleBtn").click(function(){
+			$(".wrapper").fadeToggle(500);
 		});
 	</script>
 </body>
